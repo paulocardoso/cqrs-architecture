@@ -5,8 +5,6 @@ import com.paulocardoso.api.event.EventBus;
 import com.paulocardoso.api.event.EventBusImpl;
 import org.junit.Test;
 
-import java.util.Set;
-
 public class CreateUserTest {
 
     @Test
@@ -16,7 +14,9 @@ public class CreateUserTest {
         eventBus.register(new UserCreatedEventHandler());
 
         var bus = new CommandBusImpl();
-        bus.register(new CreateUserCommandHandler(eventBus));
+        var writeUserRepository = new WriteUserRepository();
+
+        bus.register(new CreateUserCommandHandler(eventBus, writeUserRepository));
 
         var createUserCommand = new CreateUserCommand("john2");
         bus.execute(createUserCommand);

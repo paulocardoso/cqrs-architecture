@@ -2,7 +2,6 @@ package com.paulocardoso.user;
 
 import com.paulocardoso.api.command.CommandHandler;
 import com.paulocardoso.api.event.EventBus;
-import com.paulocardoso.api.event.EventBusImpl;
 
 import java.util.logging.Logger;
 
@@ -12,17 +11,19 @@ public class CreateUserCommandHandler implements CommandHandler<CreateUserComman
 
     final EventBus eventBus;
 
-    public CreateUserCommandHandler(EventBus eventBus) {
+    final WriteUserRepository writeUserRepository;
+
+    public CreateUserCommandHandler(EventBus eventBus, WriteUserRepository writeUserRepository) {
         this.eventBus = eventBus;
+        this.writeUserRepository = writeUserRepository;
     }
 
     public Void handle(CreateUserCommand command) {
 
         var user = new User(command.getUserName());
+        writeUserRepository.save(user);
 
-        UserRepository userRepository = new UserRepository();
-        userRepository.save(user);
-        LOGGER.info("Command: %s".formatted(userRepository.getEntities()));
+        LOGGER.info("Command: %s".formatted(writeUserRepository.getEntities()));
 
         eventBus.dispatch(new UserCreated(user));
 

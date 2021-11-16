@@ -6,18 +6,18 @@ import java.util.List;
 
 public class Repository<T> {
 
-    private List<T> repository;
+    private List<T> entities;
 
     public Repository() {
-        repository = new ArrayList<T>();
+        entities = new ArrayList<T>();
     }
 
     public void save(T t){
-        repository.add(t);
+        entities.add(t);
     }
 
     public List<T> getEntities(){
-        return Collections.unmodifiableList(repository);
+        return Collections.unmodifiableList(entities);
     }
 
 

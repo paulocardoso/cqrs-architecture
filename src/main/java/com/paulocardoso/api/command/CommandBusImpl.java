@@ -30,7 +30,7 @@ public class CommandBusImpl implements CommandBus {
     }
 
     private <C> CommandHandler<C, ?> findCommandHandler(C command) {
-        Class<?> commandClazz = command.getClass();
+        var commandClazz = command.getClass();
         return this.commandHandlers.stream()
                 .filter(handler -> this.canHandleCommand(handler.getClass(), commandClazz))
                 .findFirst()
