@@ -1,8 +1,8 @@
 package com.paulocardoso.api.event;
 
-import com.paulocardoso.api.command.CommandHandler;
-
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class EventBusImpl implements EventBus {
 

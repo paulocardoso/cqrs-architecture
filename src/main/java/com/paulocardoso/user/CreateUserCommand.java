@@ -2,7 +2,7 @@ package com.paulocardoso.user;
 
 import com.paulocardoso.api.command.Command;
 
-public class CreateUserCommand implements Command<Void> {
+public class CreateUserCommand implements Command<User> {
 
     private String userName;
 
